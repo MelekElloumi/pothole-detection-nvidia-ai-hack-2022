@@ -1,0 +1,36 @@
+inferencer_config: {
+  target_classes: "pothole"
+  image_width: 416
+  image_height: 416
+  image_channels: 3
+  batch_size: 16
+  tlt_config: {
+    model: "/dli/task/tao_project/models/resnet18_detector/weights/resnet18_detector.tlt"
+  }
+}
+########## LEAVE NEW LINE BELOW
+bbox_handler_config: {
+  kitti_dump: false
+  disable_overlay: false
+  overlay_linewidth: 2
+  classwise_bbox_handler_config: {
+    key:"pothole"
+    value: {
+      confidence_model: "aggregate_cov"
+      bbox_color: {
+        R: 255
+        G: 0
+        B: 0
+      }
+      clustering_config: {
+        clustering_algorithm: DBSCAN
+        coverage_threshold: 0.005
+        dbscan_eps: 0.15
+        dbscan_min_samples: 0.05
+        minimum_bounding_box_height: 20    
+        nms_iou_threshold: 0.3
+      }
+    }
+  }
+}
+########## LEAVE NEW LINE BELOW
